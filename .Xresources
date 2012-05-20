@@ -1,0 +1,44 @@
+! Update: xrdb -merge .Xresources
+Xft.antialias: true
+Xft.hinting: true
+Xft.hintstyle: 3
+Xft.dpi: 96
+!UXTerm*transparent:true
+UXTerm*borderLess:true
+!UXTerm*faceName: Consolas:size=12
+UXTerm*faceName: DejaVu Sans Mono:size=12
+!!UXTerm.font: xft:consolas:size=14
+
+!!UXTerm*geometry: 172x60+320+24
+!UXTerm*geometry: 172x60
+UXTerm*geometry: 172x54
+UXTerm.VT100*dynamicColors: On
+UXTerm*rightScrollBar: true
+UXTerm*cursorBlink: true
+
+UXTerm*background: gray10
+UXTerm*foreground: ivory
+!black
+UXTerm*color0:  #2e3436
+UXTerm*color8:  #555753
+!red
+UXTerm*color1:  #d4292b
+UXTerm*color9:  #e74837
+!green
+UXTerm*color2:  #0f9a4e
+UXTerm*color10: #9ccd61
+!yellow
+UXTerm*color3:  #c4a000
+UXTerm*color11: #fce94f
+!blue
+UXTerm*color4:  #188cd5
+UXTerm*color12: #5d9cdf
+!magenta
+UXTerm*color5:  #75507b
+UXTerm*color13: #ad7fa8
+!cyan
+UXTerm*color6:  #06989a
+UXTerm*color14: #34e2e2
+!white
+UXTerm*color7:  #d3d7cf
+UXTerm*color15: #eeeeec

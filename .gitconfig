@@ -1,0 +1,28 @@
+# Private data moved to ~/.secrets env vars
+#[github]
+#	user = ???
+#	token = ???
+#[user]
+#	name = ???
+#	email = ???
+[core]
+	autocrlf = input
+	safecrlf = true
+	excludesfile = ~/.gitignore
+        attributesfile = ~/.gitattributes 
+[alias]
+	hist = log --pretty=format:\"%ad [%h]%d %s\" --graph --date=short
+        l = log --graph --date=short
+        changes = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\" --name-status
+        short = log --pretty=format:\"%h %cr %cn %Cgreen%s%Creset\"
+        changelog = log --pretty=format:\" * %s\"
+        shortnocolor = log --pretty=format:\"%h %cr %cn %s\"
+        unstage = reset HEAD # remove files from index (tracking)
+        uncommit = reset --soft HEAD^ # go back before last commit, with files in uncommitted state
+        filelog = log -u # show changes to a file
+        mt = mergetool # fire up the merge tool
+[color]
+        ui = true
+[merge]
+        summary = true
+        verbosity = 1
