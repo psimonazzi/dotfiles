@@ -53,9 +53,9 @@ if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     if [ $(id -u) -eq 0 ];
     then # root user
-        PS1='\e[1;31m${debian_chroot:+($debian_chroot)}\u@\h:\t:\w\$ \e[m'
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[01;31m\]\u@\h:\t:\w\$\[\033[00m\] '
     else # normal user
-        PS1='\e[0;32m${debian_chroot:+($debian_chroot)}\u@\h:\t:\w\$ \e[m'
+        PS1='${debian_chroot:+($debian_chroot)}\[\033[00;32m\]\u@\h:\t:\w\$\[\033[00m\] '
     fi
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\t:\w\$ '

@@ -48,8 +48,6 @@ To update later on, just run the command again.
 ## Credits
 
 Done in the spirit of http://dotfiles.github.com.
-
-General setup and installation inspired by [mathiasbynens](https://github.com/mathiasbynens/dotfiles).
-
+General setup and installation inspired by [@mathiasbynens](https://github.com/mathiasbynens/dotfiles).
 Emacs customizations taken from countless places: most are mentioned in the source.
 
