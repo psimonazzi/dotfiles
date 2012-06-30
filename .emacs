@@ -1,4 +1,4 @@
-;; Emacs Init File v2012.05.20.1
+;; Emacs Init File v2012.06.02.1
 ;; "It's dangerous to go alone. Take this!"
 ;;
 ;; Inspired by Emacs Prelude, ErgoEmacs, Emacs Rocks and others
@@ -6,7 +6,7 @@
 (setq user-full-name (getenv "NAME"))
 (setq user-mail-address (getenv "MAIL_ADDRESS"))
 
-;; Not needed yet
+;; Not needed yet!
 ;;(message "%s" "Emacs is powering up. Please be patient, Master...")
 
 ;; Define paths
@@ -198,7 +198,7 @@
 ;; Windows-like selection (CUA mode)
 ;(pc-selection-mode t)
 (cua-mode 1)
-;; Use the clipboard
+;; Use the clipboard (t by default in 24)
 (setq x-select-enable-clipboard t)
 ;; Decorated buffer switcher
 (iswitchb-mode t)
@@ -267,7 +267,8 @@
 (define-key global-map [f12] 'highlight-symbol-next)
 
 (global-set-key (kbd "C-z") 'undo) ;; Standard undo
-(global-set-key (kbd "C-S-z") 'redo) ;; Standard redo
+(global-set-key (kbd "C-S-z") (lambda () (interactive)
+                                (message "%s" "To redo after undo, C-g (or any other command) then undo again")))
 
 (global-set-key (kbd "<C-prior>") 'previous-user-buffer) ;; Ctrl+PageUp - switch to previous user buffer
 (global-set-key (kbd "<C-next>") 'next-user-buffer) ;; Ctrl+PageDown - switch to next user buffer
@@ -345,16 +346,16 @@
 ;;(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
 
 ;; Magit GIT mode
-;(require 'magit)
+(require 'magit nil 'noerror)
 
 ;; idle-highlight-mode - Highlight each occurrence of the word under the cursor
-(require 'idle-highlight-mode)
+(require 'idle-highlight-mode nil 'noerror)
 
 ;; highlight-symbol
-(require 'highlight-symbol)
+(require 'highlight-symbol nil 'noerror)
 
-;; php mode
-;;(require 'php-mode)
+;; rainbow-mode (minor mode to display color represented as hex or html strings)
+(require 'rainbow-mode nil 'noerror)
 
 ;; NXML mode
 ;; nxhtml conditional load. Byte-compile with M-x nxhtmlmaint-start-byte-compilation
@@ -541,6 +542,7 @@ User buffers are those whose name does not start with *."
     (while (and (string-match "^*" (buffer-name)) (< i 50))
       (setq i (1+ i)) (next-buffer) )))
 
+
 (defun previous-user-buffer ()
   "Switch to the previous user buffer.
 User buffers are those whose name does not start with *."
@@ -550,6 +552,7 @@ User buffers are those whose name does not start with *."
     (while (and (string-match "^*" (buffer-name)) (< i 50))
       (setq i (1+ i)) (previous-buffer) )))
 
+
 (defun next-emacs-buffer ()
   "Switch to the next emacs buffer.
 Emacs buffers are those whose name starts with *."
@@ -558,6 +561,7 @@ Emacs buffers are those whose name starts with *."
   (let ((i 0))
     (while (and (not (string-match "^*" (buffer-name))) (< i 50))
       (setq i (1+ i)) (next-buffer) )))
+
 
 (defun previous-emacs-buffer ()
   "Switch to the previous emacs buffer.
@@ -606,17 +610,18 @@ by using nxml's indentation rules."
   (message (format "%d" (- (region-end) (region-beginning)))))
 
 
-(defun wc ()
-  "Count the words in the current buffer, show the result in the minibuffer"
-  (interactive)
-  (save-excursion
-    (save-restriction
-      (widen)
-      (goto-char (point-min))
-      (let ((count 0))
-	(while (forward-word 1)
-	  (setq count(1+ count)))
-	(message "There are %d words in the buffer" count)))))
+;; Obsoleted by count-words in 24
+;; (defun wc ()
+;;   "Count the words in the current buffer, show the result in the minibuffer"
+;;   (interactive)
+;;   (save-excursion
+;;     (save-restriction
+;;       (widen)
+;;       (goto-char (point-min))
+;;       (let ((count 0))
+;; 	(while (forward-word 1)
+;; 	  (setq count(1+ count)))
+;; 	(message "There are %d words in the buffer" count)))))
 
 
 (defun my-grep ()
