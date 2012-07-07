@@ -1,4 +1,4 @@
-;; Emacs Init File v2012.06.02.1
+;; Emacs Init File v2012.07.06.1
 ;; "It's dangerous to go alone. Take this!"
 ;;
 ;; Inspired by Emacs Prelude, ErgoEmacs, Emacs Rocks and others
@@ -57,6 +57,8 @@
 (setq case-fold-search t)
 (setq text-mode-hook (quote (text-mode-hook-identify)))
 (transient-mark-mode t)
+;; Transparently open compressed files
+(auto-compression-mode t)
 ;; revert buffers automatically when underlying files are changed externally
 (global-auto-revert-mode t)
 ;; Death to the tabs!
@@ -64,11 +66,13 @@
 ;; Show me empty lines after buffer end
 (set-default 'indicate-empty-lines t)
 ;; smart indenting and pairing
-;(electric-pair-mode t)
+;;(electric-pair-mode t)
 (electric-indent-mode t)
 (electric-layout-mode t)
 ;; Break lines at spaces
-;(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
+;; Sentences do not need double spaces to end. Period.
+(set-default 'sentence-end-double-space nil)
 ;; syntax highlighting
 (global-font-lock-mode t)
 (setq font-lock-maximum-decoration t)
@@ -255,10 +259,9 @@
                               (interactive)
                               (delete-other-windows)
                               (follow-mode nil)))
-(define-key global-map [f8] (lambda () ;; two pages side-by-side
+(define-key global-map [f8] (lambda () ;; two pages side-by-side (add (follow-mode t) to scroll both)
                               (interactive)
-                              (split-window-horizontally)
-                              (follow-mode t)))
+                              (split-window-horizontally)))
 
 ;; highlight current word (More convenient that C-s C-w C-w C-w... Requires highlight-symbol.el)
 (define-key global-map [f9] (lambda () (interactive) (idle-highlight-mode)))
@@ -392,11 +395,12 @@
   "Major mode for editing Markdown files" t)
 (add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
 
-;; javascript mode
-;;(autoload 'js2-mode "js2" nil t)
-;;(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; javascript js2 mode
+(autoload 'js2-mode "js2-mode" nil t)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 ;; force my colors on js2
-;;(setq js2-use-font-lock-faces t)
+(setq js2-use-font-lock-faces t)
+;; javascript js mode
 (add-hook 'js-mode-hook
           (lambda () (electric-layout-mode -1)))
 ;; Indent 2 spaces in js
@@ -678,10 +682,10 @@ by using nxml's indentation rules."
 ;; (define-key minibuffer-local-completion-map " " 'myparse-minibuffer)
 
 ;; Insert date into buffer
-;(defun insert-date ()
-;"Insert date at point."
-;(interactive)
-;(insert (format-time-string "%A, %B %e, %Y %k:%M:%S %z")))
+;;(defun insert-date ()
+;;"Insert date at point."
+;;(interactive)
+;;(insert (format-time-string "%A, %B %e, %Y %k:%M:%S %z")))
 
 
 

@@ -19,6 +19,11 @@
  '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:background "brown4" :foreground "palevioletred1" :slant italic))))
  '(highlight ((((class color) (background dark)) (:background "darkolivegreen" :foreground "palegreen"))))
  '(hl-line ((t (:background "grey20"))))
+ '(js2-error-face ((t (:inherit font-lock-warning-face))))
+ '(js2-external-variable-face ((t (:foreground "palegreen"))))
+ '(js2-function-param-face ((t (:foreground "palegreen"))))
+ '(js2-jsdoc-html-tag-delimiter-face ((t (:foreground "lightskyblue1"))))
+ '(js2-jsdoc-html-tag-name-face ((t (:foreground "lightskyblue1"))))
  '(lazy-highlight ((((class color) (background dark)) (:background "springgreen1" :foreground "darkolivegreen"))))
  '(linum ((t (:inherit default :foreground "grey30"))))
  '(match ((((class color) (background dark)) (:background "RoyalBlue3" :foreground "lightBlue"))))
@@ -55,4 +60,8 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(js2-basic-offset 2)
+ '(js2-cleanup-whitespace t)
+ '(js2-enter-indents-newline t)
+ '(js2-include-gears-externs nil)
+ '(js2-include-rhino-externs nil))
