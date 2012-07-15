@@ -254,7 +254,8 @@
 (define-key global-map [f4] 'save-buffer) ;; default: goto-line 
 
 (define-key global-map [f5] 'kill-this-buffer)
-(define-key global-map [f6] 'other-window) ;; place cursor in other window
+;;(define-key global-map [f6] 'other-window) ;; place cursor in other window
+(define-key global-map [f6] (lambda nil (interactive) (jump-to-next-file))) ;; open next numbered file 
 (define-key global-map [f7] (lambda () ;; single window
                               (interactive)
                               (delete-other-windows)
@@ -519,6 +520,23 @@
   (interactive)
   (setq truncate-lines nil)
   (setq word-wrap t))
+
+
+;; Inspired by Emacs Rocks talk
+(defun jump-to-next-file ()
+  "When the current file is named <N>-*, visit the next file (named <N+1>-*)"
+  (interactive)
+
+  (defun buffer-file-name-body () (file-name-nondirectory (buffer-file-name)))  
+  (defun incs (s &optional num) (number-to-string (+ (or num 1) (string-to-number s))))
+  
+  (find-file
+   (car
+    (file-expand-wildcards
+     (concat
+      "/home/ps/www/tmpl/"
+      (incs (car (split-string (buffer-file-name-body) "-")))
+     "-*")))))
 
 
 (defun recompile-all ()
