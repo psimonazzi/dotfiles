@@ -346,9 +346,6 @@
 ;;(when (file-exists-p my/emacs-dir)
 ;;  (mapc 'load (directory-files my/emacs-dir nil "^[^#].*el$")))
 
-;;(autoload 'css-mode "css-mode" "Major mode to edit CSS files." t)
-;;(add-to-list 'auto-mode-alist '("\\.css$" . css-mode))
-
 ;; Magit GIT mode
 (require 'magit nil 'noerror)
 
@@ -359,7 +356,7 @@
 (require 'highlight-symbol nil 'noerror)
 
 ;; rainbow-mode (minor mode to display color represented as hex or html strings)
-(require 'rainbow-mode nil 'noerror)
+(autoload 'rainbow-mode "rainbow-mode" nil t)
 
 ;; NXML mode
 ;; nxhtml conditional load. Byte-compile with M-x nxhtmlmaint-start-byte-compilation
@@ -379,6 +376,14 @@
 (setq nxml-attribute-indent 4)
 (setq nxml-auto-insert-xml-declaration-flag nil)
 (setq nxml-bind-meta-tab-to-complete-flag t)
+
+;; (X)HTML5 Schema for nxml-mode (https://github.com/hober/html5-el)
+(when (file-exists-p (concat my/emacs-dir "/html5-el"))
+  (add-to-list 'load-path (concat my/emacs-dir "/html5-el"))
+  (eval-after-load "rng-loc"
+    '(add-to-list 'rng-schema-locating-files (concat my/emacs-dir "/html5-el/schemas.xml")))
+  (require 'whattf-dt))
+
 
 ;; Soft word wrapping in text modes (longlines-mode obsoleted by visual-line-mode)
 ;;(add-hook 'text-mode-hook 'visual-line-mode)
