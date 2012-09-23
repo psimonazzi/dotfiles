@@ -20,6 +20,9 @@ HISTFILESIZE=2000
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+# Autofix typos
+shopt -s cdspell
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
@@ -100,6 +103,9 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
+
+alias gs='git status'
+alias history_frequency='history | cut -c 8- | sort | uniq -c | sort -n'
 
 # function to run Emacs with a window manager. Cannot use alias because it doesn't support parameters
 #function em() { emacs-snapshot-gtk -g 144x46 "$@" >/dev/null 2>&1 & }

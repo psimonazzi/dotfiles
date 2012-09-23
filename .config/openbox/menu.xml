@@ -9,6 +9,9 @@
   <item label="Terminal emulator">
     <action name="Execute"><execute>x-terminal-emulator</execute></action>
   </item>
+  <item label="Terminal emulator (mini)">
+    <action name="Execute"><execute>x-terminal-emulator -geometry 80x40+1096+240</execute></action>
+  </item>
   <item label="Emacs">
     <action name="Execute"><execute>em</execute></action>
   </item>

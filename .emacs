@@ -1,4 +1,4 @@
-;; Emacs Init File v2012.07.06.1
+;; Emacs Init File v2012.08.08.1
 ;; "It's dangerous to go alone. Take this!"
 ;;
 ;; Inspired by Emacs Prelude, ErgoEmacs, Emacs Rocks and others
@@ -33,7 +33,7 @@
 ;; Set font as soon as possible to avoid flickering
 ;;(set-default-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
 ;;(set-default-font "Bitstream Vera Sans Mono-11")
-(set-default-font my/mono-font)
+(set-frame-font my/mono-font)
 ;;(set-face-font 'default "Consolas-14")
 ;;(set-frame-font "Consolas-14")
 

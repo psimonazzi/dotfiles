@@ -12,7 +12,7 @@ My precious dotfiles for Linux (tested on Debian/Ubuntu). They keep my customiza
 ## Installation
 
 You place the files in `~/dotfiles`, symlinked in your home dir so programs can find them.
-Sensitive data (user name, email, crypto keys etc.) is kept in a separate `~/.secrets` file, and exported as environment variables. To use these dotfiles you must create your secrets file, like this:
+Sensitive data (user name, email, crypto keys etc.) is kept in a separate `~/.secrets` file, and exported as environment variables. To use these dotfiles you should create your secrets file, like this:
 
 ```bash
 cat > ~/.secrets <<EOF
@@ -37,7 +37,7 @@ cd; git clone https://github.com/psimonazzi/dotfiles.git && cd dotfiles && ./boo
 
 ### Without Git
 
-To install the files in your home dir, without cloning the Git repository (WARNING: existing files in your home dir will be overwritten!):
+To install the files in your home dir, without cloning the Git repository (WARNING: existing dotfiles in your home dir will be overwritten!):
 
 ```bash
 cd; curl -#L https://github.com/psimonazzi/dotfiles/tarball/master | tar -xzv --strip-components 1 --exclude={README.md,bootstrap.sh}
@@ -49,5 +49,6 @@ To update later on, just run the command again.
 
 Done in the spirit of http://dotfiles.github.com.
 General setup and installation inspired by [@mathiasbynens](https://github.com/mathiasbynens/dotfiles).
-Emacs customizations taken from countless places: most are mentioned in the source.
+
+Emacs customizations taken from countless places: most are mentioned in the source. I don't know Lisp, so don't ask.
 
