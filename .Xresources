@@ -5,9 +5,7 @@ Xft.hintstyle: 3
 Xft.dpi: 96
 !UXTerm*transparent:true
 UXTerm*borderLess:true
-!UXTerm*faceName: Consolas:size=12
 UXTerm*faceName: DejaVu Sans Mono:size=12
-!!UXTerm.font: xft:consolas:size=14
 
 !!UXTerm*geometry: 172x60+320+24
 !UXTerm*geometry: 172x60

@@ -3,8 +3,8 @@
 ;;
 ;; Inspired by Emacs Prelude, ErgoEmacs, Emacs Rocks and others
 
-(setq user-full-name (getenv "NAME"))
-(setq user-mail-address (getenv "MAIL_ADDRESS"))
+(setq user-full-name (getenv "GIT_AUTHOR_NAME"))
+(setq user-mail-address (getenv "GIT_AUTHOR_EMAIL"))
 
 ;; Not needed yet!
 ;;(message "%s" "Emacs is powering up. Please be patient, Master...")
@@ -33,7 +33,9 @@
 ;; Set font as soon as possible to avoid flickering
 ;;(set-default-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
 ;;(set-default-font "Bitstream Vera Sans Mono-11")
-(set-frame-font my/mono-font)
+(condition-case ex
+    (set-frame-font my/mono-font)
+  (error (message (format "Cannot set font, reverting to default. %s" ex))))
 ;;(set-face-font 'default "Consolas-14")
 ;;(set-frame-font "Consolas-14")
 
@@ -289,6 +291,7 @@
 
 ;; Unicode char insert
 ;; « and » are already mapped to AltGr-< and AltGr->
+;; Or use "C-x 8 <" and "C-x 8 >" (view all commands with C-x C-h)
 ;;(global-set-key (kbd "C-M-l") "λ")
 (global-set-key (kbd "M-2") "“") ;;(ucs-insert #x2018 1 t)
 (global-set-key (kbd "M-\"") "”") ;;(ucs-insert #x2019 1 t)
@@ -355,8 +358,9 @@
 ;; highlight-symbol
 (require 'highlight-symbol nil 'noerror)
 
-;; rainbow-mode (minor mode to display color represented as hex or html strings)
-(autoload 'rainbow-mode "rainbow-mode" nil t)
+;; rainbow-mode
+(autoload 'rainbow-mode "rainbow-mode"
+  "Minor mode to display colors represented as hex or html strings" t)
 
 ;; NXML mode
 ;; nxhtml conditional load. Byte-compile with M-x nxhtmlmaint-start-byte-compilation
@@ -651,14 +655,14 @@ by using nxml's indentation rules."
 ;; 	(message "There are %d words in the buffer" count)))))
 
 
-(defun my-grep ()
+(defun grep-dir ()
   "grep the whole directory for something, defaults to term at cursor position"
   (interactive)
   (setq default (thing-at-point 'symbol))
-  (setq needle (or (read-string (concat "grep dir for " default " ")) default))
+  (setq needle (or (read-string (concat "grep dir for (default: " default ") ")) default))
   (setq needle (if (equal needle "") default needle))
-  (grep (concat "egrep -s -i -n " needle " * /dev/null")))
-;;(global-set-key "\C-x." 'my-grep)
+  (grep (concat "egrep -s -i -n -r " needle " * /dev/null")))
+;;(global-set-key "\C-x." 'grep-dir)
 
 
 (defun annotate-text (&optional s)
