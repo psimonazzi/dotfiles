@@ -69,8 +69,9 @@
 (set-default 'indicate-empty-lines t)
 ;; smart indenting and pairing
 ;;(electric-pair-mode t)
-(electric-indent-mode t)
-(electric-layout-mode t)
+(if (>= emacs-major-version 24)
+    ((electric-indent-mode t)
+     (electric-layout-mode t)))
 ;; Break lines at spaces
 ;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; Sentences do not need double spaces to end. Period.
