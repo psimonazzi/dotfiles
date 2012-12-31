@@ -70,8 +70,9 @@
 ;; smart indenting and pairing
 ;;(electric-pair-mode t)
 (if (>= emacs-major-version 24)
-    ((electric-indent-mode t)
-     (electric-layout-mode t)))
+    (progn
+      (electric-indent-mode t)
+      (electric-layout-mode t)))
 ;; Break lines at spaces
 ;;(add-hook 'text-mode-hook 'turn-on-auto-fill)
 ;; Sentences do not need double spaces to end. Period.
@@ -296,10 +297,11 @@
 ;;(global-set-key (kbd "C-M-l") "λ")
 (global-set-key (kbd "M-2") "“") ;;(ucs-insert #x2018 1 t)
 (global-set-key (kbd "M-\"") "”") ;;(ucs-insert #x2019 1 t)
+(global-set-key (kbd "M-\-") "—") ;;(ucs-insert #x2019 1 t)
 
 ;; Fix 'home' and 'end' keys (obsolete)
-;;( global-set-key [home] 'beginning-of-line)
-;;( global-set-key [end] 'end-of-line)
+( global-set-key [home] 'beginning-of-line)
+( global-set-key [end] 'end-of-line)
 ;; Set Meta + P to next error
 ;;( global-set-key "\M-p" 'next-error)
 
