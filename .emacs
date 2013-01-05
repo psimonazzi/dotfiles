@@ -1,4 +1,4 @@
-;; Emacs Init File v2012.08.08.1
+;; Emacs Init File
 ;; "It's dangerous to go alone. Take this!"
 ;;
 ;; Inspired by Emacs Prelude, ErgoEmacs, Emacs Rocks and others
@@ -31,13 +31,12 @@
 (defconst my/serif-font "DejaVu Serif-14")
 
 ;; Set font as soon as possible to avoid flickering
-;;(set-default-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
-;;(set-default-font "Bitstream Vera Sans Mono-11")
+;;(set-frame-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
+;;(set-frame-font "Bitstream Vera Sans Mono-11")
+;;(set-frame-font "Inconsolata-16")
 (condition-case ex
     (set-frame-font my/mono-font)
   (error (message (format "Cannot set font, reverting to default. %s" ex))))
-;;(set-face-font 'default "Consolas-14")
-;;(set-frame-font "Consolas-14")
 
 ;; Window size in characters, scrollbar position
 ;(setq initial-frame-alist
@@ -379,8 +378,8 @@
 (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
 (setq nxml-slash-auto-complete-flag t)
-(setq nxml-child-indent 4)
-(setq nxml-attribute-indent 4)
+(setq nxml-child-indent 2)
+(setq nxml-attribute-indent 2)
 (setq nxml-auto-insert-xml-declaration-flag nil)
 (setq nxml-bind-meta-tab-to-complete-flag t)
 
@@ -793,3 +792,6 @@ by using nxml's indentation rules."
 ;; (add-hook 'text-mode-hook
 ;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
 
+;;;; START EMACS SERVER ;;;;
+; To open files with this instance: emacsclient <file>
+(server-start)
