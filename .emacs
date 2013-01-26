@@ -126,7 +126,7 @@
 (setq custom-file my/emacs-custom)
 (load custom-file)
 
-;; global font-lock customizations
+;; global font-lock customizations 
 (font-lock-add-keywords
  nil '(
        ("\\<\\(TODO\\)\\>" 1 font-lock-warning-face prepend)
@@ -538,16 +538,17 @@
   "When the current file is named <N>-*, visit the next file (named <N+1>-*)"
   (interactive)
 
-  (defun buffer-file-name-body () (file-name-nondirectory (buffer-file-name)))  
+  (defun buffer-file-dir () (file-name-directory (buffer-file-name)))
+  (defun buffer-file-name-body () (file-name-nondirectory (buffer-file-name)))
   (defun incs (s &optional num) (number-to-string (+ (or num 1) (string-to-number s))))
   
   (find-file
    (car
     (file-expand-wildcards
      (concat
-      "/home/ps/www/tmpl/"
+      (buffer-file-dir)
       (incs (car (split-string (buffer-file-name-body) "-")))
-     "-*")))))
+      "-*")))))
 
 
 (defun recompile-all ()
