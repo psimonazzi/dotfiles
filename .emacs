@@ -299,10 +299,10 @@
 (global-set-key (kbd "M-\-") "—") ;;(ucs-insert #x2019 1 t)
 
 ;; Fix 'home' and 'end' keys (obsolete)
-( global-set-key [home] 'beginning-of-line)
-( global-set-key [end] 'end-of-line)
+(global-set-key [home] 'beginning-of-line)
+(global-set-key [end] 'end-of-line)
 ;; Set Meta + P to next error
-;;( global-set-key "\M-p" 'next-error)
+;;(global-set-key "\M-p" 'next-error)
 
 ;; Make control+pageup/down scroll the other buffer
 ;;(global-set-key [C-next] 'scroll-other-window)
@@ -354,26 +354,19 @@
 ;; Magit GIT mode
 (require 'magit nil 'noerror)
 
-;; idle-highlight-mode - Highlight each occurrence of the word under the cursor
-(require 'idle-highlight-mode nil 'noerror)
+(autoload 'idle-highlight-mode "idle-highlight-mode"
+  "Highlight each occurrence of the word under the cursor" t)
 
-;; highlight-symbol
 (require 'highlight-symbol nil 'noerror)
 
-;; rainbow-mode
 (autoload 'rainbow-mode "rainbow-mode"
   "Minor mode to display colors represented as hex or html strings" t)
 
+;; A custom www-mode
+(require 'www-mode nil 'noerror)
+
+
 ;; NXML mode
-;; nxhtml conditional load. Byte-compile with M-x nxhtmlmaint-start-byte-compilation
-;; (setq *nxhtml-autostart-file* (expand-file-name (concat my/emacs-dir "/nxhtml/autostart.el")))
-;; (defun load-nxhtml-if-required ()
-;;   (if (and (string-match ".+\\.\\(php\\|html\\|htm\\)$" (buffer-file-name))
-;;    (not (featurep 'nxhtml-autostart)))
-;;       (progn
-;; (load *nxhtml-autostart-file*)
-;; (nxhtml-mumamo-mode)))) ;; mumamo loads nxhtml-mode et al
-;; (add-hook 'find-file-hook 'load-nxhtml-if-required)
 (add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|html\\)\\'" . nxml-mode))
 (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
@@ -384,11 +377,11 @@
 (setq nxml-bind-meta-tab-to-complete-flag t)
 
 ;; (X)HTML5 Schema for nxml-mode (https://github.com/hober/html5-el)
-(when (file-exists-p (concat my/emacs-dir "/html5-el"))
-  (add-to-list 'load-path (concat my/emacs-dir "/html5-el"))
-  (eval-after-load "rng-loc"
-    '(add-to-list 'rng-schema-locating-files (concat my/emacs-dir "/html5-el/schemas.xml")))
-  (require 'whattf-dt))
+;; (when (file-exists-p (concat my/emacs-dir "/html5-el"))
+;;   (add-to-list 'load-path (concat my/emacs-dir "/html5-el"))
+;;   (eval-after-load "rng-loc"
+;;     '(add-to-list 'rng-schema-locating-files (concat my/emacs-dir "/html5-el/schemas.xml")))
+;;   (require 'whattf-dt))
 
 
 ;; Soft word wrapping in text modes (longlines-mode obsoleted by visual-line-mode)
@@ -405,7 +398,7 @@
 ;; Markdown mode (need markdown bin package)
 (autoload 'markdown-mode "markdown-mode"
   "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.md$" . markdown-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)$" . markdown-mode))
 
 ;; javascript js2 mode
 (autoload 'js2-mode "js2-mode" nil t)
