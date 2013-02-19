@@ -5,11 +5,11 @@ Xft.hintstyle: 3
 Xft.dpi: 96
 !UXTerm*transparent:true
 UXTerm*borderLess:true
-UXTerm*faceName: DejaVu Sans Mono:size=12
+UXTerm*faceName: Ubuntu Mono:size=14
 
 !!UXTerm*geometry: 172x60+320+24
 !UXTerm*geometry: 172x60
-UXTerm*geometry: 172x54
+UXTerm*geometry: 172x50
 UXTerm.VT100*dynamicColors: On
 UXTerm*rightScrollBar: true
 UXTerm*cursorBlink: true
