@@ -1,4 +1,2 @@
 #!/bin/sh
-#emacs-snapshot-gtk -bg Grey90 -fg Grey10
-#emacs-snapshot-gtk -g 140x54+24+16 --no-site-file $* >/dev/null 2>&1 &
-emacs-snapshot-gtk -g 144x46 "$@" >/dev/null 2>&1 &
+emacs-snapshot-gtk "$@" >/dev/null 2>&1 &

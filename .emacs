@@ -40,9 +40,14 @@
 
 ;; Window size in characters, scrollbar position
 ;(setq initial-frame-alist
-;      (append (list '(top . 0) '(left . 120) '(width . 140) '(height . 46) '(vertical-scroll-bars . right)) initial-frame-alist))
-;; Fullscreen
-;(set-frame-parameter nil 'fullscreen nil)
+;      (append (list '(top . 24) '(left . 120) '(width . 144) '(height . 46)) initial-frame-alist))
+(if (window-system)
+    (cond
+     ((> (display-pixel-width) 1480)
+      (set-frame-size (selected-frame) 144 46)
+      (set-frame-position (selected-frame) (/ (- (display-pixel-width) 1480) 2) 24)))
+     (t
+      (set-frame-parameter (selected-frame) 'fullscreen nil)))
 
 ;; custom Emacs 24 color themes support
 ;;(add-to-list 'custom-theme-load-path (concat my/emacs-dir "themes/"))

@@ -759,11 +759,11 @@ type="the window's _OB_APP_TYPE property (see obxprob)..
                 <y>40</y>
             </position>
         </application>
-        <application class="Emacs-snapshot-gtk">
+        <!--<application class="Emacs-snapshot-gtk">
             <position>
                 <x>center</x>
                 <y>40</y>
             </position>
-        </application>
+        </application>-->
     </applications>
 </openbox_config>
