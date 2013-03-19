@@ -1,17 +1,17 @@
 ;;;###autoload
 (define-minor-mode www-mode
-  "Helpers for writing articles for websites."
+  "Helpers for writing HTML documents."
   :lighter " www"
   :keymap (let ((map (make-sparse-keymap)))
-            (define-key map (kbd "C-c i") 'www/insert-image)
-            (define-key map (kbd "C-c b") 'www/insert-blockquote)
-            (define-key map (kbd "C-c c") 'www/insert-code)
-            (define-key map (kbd "C-c n") 'www/insert-footnotes)
-            (define-key map (kbd "C-c m") 'www/insert-meta)
-            (define-key map (kbd "C-c q") 'www/insert-cite) 
-            (define-key map (kbd "C-c u") 'www/insert-static-url)
-            (define-key map (kbd "C-c e") 'www/html-escape-region)
-            (define-key map (kbd "C-c r") 'www/insert-code-region)
+            (define-key map (kbd "C-c C-c i") 'www/insert-image)
+            (define-key map (kbd "C-c C-c b") 'www/insert-blockquote)
+            (define-key map (kbd "C-c C-c c") 'www/insert-code)
+            (define-key map (kbd "C-c C-c r") 'www/insert-code-region)
+            (define-key map (kbd "C-c C-c n") 'www/insert-footnotes)
+            (define-key map (kbd "C-c C-c m") 'www/insert-meta)
+            (define-key map (kbd "C-c C-c q") 'www/insert-cite) 
+            (define-key map (kbd "C-c C-c u") 'www/insert-static-url)
+            (define-key map (kbd "C-c C-c e") 'www/html-escape-region)
             map))
 
 ;;;###autoload
@@ -54,18 +54,18 @@
   (interactive)
   (insert "
 <figure class=\"nostretch\">
-  <blockquote>“”</blockquote>
+  <blockquote><p>“”</p></blockquote>
   <figcaption><cite><a title=\"\" href=\"\"></a></cite></figcaption>
 </figure>
 ")
-  (backward-char 90))
+  (backward-char 94))
 
 (defun www/insert-code ()
   "Insert a figure element with pre & code, and a figcaption."
   (interactive)
   (insert "
 <figure>
-  <pre><code data-language=\"\">
+  <pre><code data-language=\"\" class=\"maxheight\">
 
   </code></pre>
 </figure>
@@ -73,13 +73,13 @@
   (backward-char 27))
 
 (defun www/insert-code-region (start end)
-  "Insert a figure element with pre & code, and a figcaption."
+  "Insert a figure element with pre & code around the region, and a figcaption."
   (interactive "r")
   (save-excursion
     (let ((text (delete-and-extract-region start end)))
       (insert "
 <figure>
-  <pre><code data-language=\"\">
+  <pre><code data-language=\"\" class=\"maxheight\">
 ")
       (insert text)
       (insert "
@@ -94,9 +94,9 @@
   (backward-char 9))
 
 (defun www/insert-static-url ()
-  "Insert a base url for cloud hosted resources. Read from env variable MOGNET_STATIC_URL."
+  "Insert a base url for cloud hosted resources. Read from env variable WWW_STATIC_URL."
   (interactive)
-  (insert (getenv "MOGNET_STATIC_URL")))
+  (insert (getenv "WWW_STATIC_URL")))
 
 (defun www/insert-footnotes ()
   "Insert a list of footnotes."
