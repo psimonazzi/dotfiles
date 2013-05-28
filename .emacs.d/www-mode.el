@@ -9,7 +9,7 @@
             (define-key map (kbd "C-c C-c r") 'www/insert-code-region)
             (define-key map (kbd "C-c C-c n") 'www/insert-footnotes)
             (define-key map (kbd "C-c C-c m") 'www/insert-meta)
-            (define-key map (kbd "C-c C-c q") 'www/insert-cite) 
+            (define-key map (kbd "C-c C-c q") 'www/insert-cite)
             (define-key map (kbd "C-c C-c u") 'www/insert-static-url)
             (define-key map (kbd "C-c C-c e") 'www/html-escape-region)
             map))
@@ -36,6 +36,22 @@
       (replace-string "\"" "&quot;")
       (goto-char (point-min))
       (replace-string "'" "&#39;")
+      )))
+
+(defun www/escape-url (start end)
+  "Escape the current region as URL hex format."
+  (interactive "r")
+  (save-excursion
+    (let ((text (delete-and-extract-region start end)))
+      (insert (url-hexify-string text))
+      )))
+
+(defun www/unescape-url (start end)
+  "Unescape the current region as URL hex format."
+  (interactive "r")
+  (save-excursion
+    (let ((text (delete-and-extract-region start end)))
+      (insert (url-unhex-string text))
       )))
 
 (defun www/insert-image ()
