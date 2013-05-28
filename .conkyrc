@@ -41,7 +41,7 @@ text_buffer_size 2048
 #maximum_width 1280
 
 TEXT
-${alignr}${time %H:%M}
+${alignr}${time %H:%M:%S}
 ${alignr}${color D7D3C5}${time %d %B}
 ${alignr}${uptime_short}
 
