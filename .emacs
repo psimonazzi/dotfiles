@@ -12,7 +12,7 @@
 ;; Define paths
 (defconst my/emacs-custom "~/.emacs-custom.el"
   "Emacs custom file. UI Settings are automatically stored here")
-(defconst my/emacs-dir "~/.emacs.d"
+(defconst my/emacs-dir "~/.emacs.d/lisp"
   "Personal emacs dir")
 ;; (defconst my/emacs-custom-light "~/emacs/emacs-custom-light.el"
 ;;   "Custom theme, light background")
@@ -39,8 +39,6 @@
   (error (message (format "Cannot set font, reverting to default. %s" ex))))
 
 ;; Window size in characters, scrollbar position
-;(setq initial-frame-alist
-;      (append (list '(top . 24) '(left . 120) '(width . 144) '(height . 46)) initial-frame-alist))
 (if (window-system)
     (cond
      ((> (display-pixel-width) 1480)
@@ -48,6 +46,9 @@
       (set-frame-position (selected-frame) (/ (- (display-pixel-width) 1480) 2) 24)))
      (t
       (set-frame-parameter (selected-frame) 'fullscreen nil)))
+;; or set fullscreen
+;(toggle-frame-fullscreen) ;; without window decorations
+;(toggle-frame-maximized)
 
 ;; custom Emacs 24 color themes support
 ;;(add-to-list 'custom-theme-load-path (concat my/emacs-dir "themes/"))
@@ -348,7 +349,7 @@
 
 ;;;; EXTERNAL PACKAGES ;;;;
 
-;; emacs-lisp packages directory. Default is .emacs.d
+;; emacs-lisp packages directory. Should not be .emacs.d
 ;; To see what your load-path is, run inside emacs: C-h v load-path
 (add-to-list 'load-path my/emacs-dir)
 
