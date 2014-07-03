@@ -26,8 +26,10 @@
 
 ;; Don't show the GNU splash screen
 (setq inhibit-startup-message t)
+;; Blank scratch buffer
+(setq initial-scratch-message "")
 
-(defconst my/mono-font "Consolas-14")
+(defconst my/mono-font "Luculent-14");;(defconst my/mono-font "Consolas-14")
 (defconst my/serif-font "DejaVu Serif-14")
 
 ;; Set font as soon as possible to avoid flickering
@@ -253,6 +255,8 @@
       recentf-max-menu-items 16)
 (recentf-mode t)
 
+;; interactive name completion for describe-function, describe-variable, etc.
+(icomplete-mode 1)
 
 
 ;;;; KEYBOARD CONTROLS ;;;;
@@ -371,6 +375,11 @@
 ;; A custom www-mode
 (require 'www-mode nil 'noerror)
 
+(require 'yaml-mode nil 'noerror)
+(add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
+(add-hook 'yaml-mode-hook
+          '(lambda ()
+             (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; NXML mode
 (add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|html\\)\\'" . nxml-mode))
@@ -427,7 +436,12 @@
 ;;(require 'tramp)
 ;;(setq tramp-default-method "scp")
 
-;; hippie expand is dabbrev expand on steroids
+;; Visual autocompletion when auto-complete is installed
+;; (will show minor mode AC in buffer)
+(require 'auto-complete-config nil 'noerror)
+(ac-config-default)
+
+;; hippie expand is more advanced than dabbrev expand
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
                                          try-expand-dabbrev-all-buffers
                                          try-expand-dabbrev-from-kill
@@ -456,7 +470,8 @@
 (setq uniquify-after-kill-buffer-p t) ; rename after killing uniquified
 (setq uniquify-ignore-buffers-re "^\\*") ; don't muck with special buffers
 
-;; ido-mode
+;; ido-mode (minibuffer autocompletion)
+;; (require 'ido)
 ;; (ido-mode t)
 ;; (setq ido-enable-prefix nil
 ;;       ido-enable-flex-matching t
@@ -470,7 +485,9 @@
 ;;       ispell-extra-args '("--sug-mode=ultra"))
 ;; (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
-
+;; Groovy/gradle mode
+(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+(add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode))
 
 ;;;; USEFUL FUNCTIONS ;;;;
 
@@ -504,8 +521,8 @@
   (setq-default line-spacing 0.5)
   (set-frame-parameter nil 'font my/serif-font)
   (redraw-frame (selected-frame))
-  (message "Please rest your eyes...")
-  )
+  (big-fringe-mode 1)
+  (message "Please rest your eyes..."))
 
 (defun eye-code-style ()
   "Use when coding."
@@ -513,6 +530,7 @@
   (setq-default line-spacing nil)
   (set-frame-parameter nil 'font my/mono-font)
   (redraw-frame (selected-frame))
+  (big-fringe-mode 0)
   (message "Please code hard..."))
 
 (defun eye-style-switch ()
@@ -524,6 +542,20 @@
     (if (eq current-state 0) (setq next-state 1) (setq next-state 0))
     (put 'eye-style-switch 'state next-state)))
 
+;; Inspired by Emacs, Naked
+(defvar big-fringe-mode nil)
+(define-minor-mode big-fringe-mode
+  "Minor mode to set a big fringe (lateral padding)."
+  :init-value nil
+  :global t
+  :variable big-fringe-mode
+  :group 'editing-basics
+  (if (not big-fringe-mode)
+      (set-fringe-style nil)
+    (set-fringe-mode
+     (/ (- (frame-pixel-width)
+           (* 100 (frame-char-width)))
+        2))))
 
 (defun soft-wrap-lines ()
   "Make lines wrap at window edge and on word boundary, in current buffer."
@@ -791,6 +823,42 @@ by using nxml's indentation rules."
 ;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
 ;; (add-hook 'text-mode-hook
 ;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
+
+;; Python (python.el)
+(require 'python)
+(when (featurep 'python-mode) (unload-feature 'python-mode t))
+;; Indent next line when pressing return (by default bound to C-j)
+(add-hook 'python-mode-hook
+          #'(lambda ()
+              (define-key python-mode-map "\C-m" 'newline-and-indent)))
+;; autocompletion with Jedi
+(add-hook 'python-mode-hook 'jedi:setup)
+;; (defun my-jedi-setup ()
+;;   (jedi:setup)
+;;   (setq jedi:server-command
+;;         (list "python3" jedi:server-script)))
+;; (add-hook 'python-mode-hook 'my-jedi-setup)
+
+;; with auto-complete
+;; (defvar ac-source-python
+;;   '((candidates .
+;; 		(lambda ()
+;; 		  (mapcar '(lambda (completion)
+;; 			     (first (last (split-string completion "\\." t))))
+;; 			  (python-symbol-completions (python-partial-symbol)))))))
+;; (add-hook 'python-mode-hook
+;; 	  (lambda() (setq ac-sources '(ac-source-python))))
+;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python))
+;; Python (python-mode.el)
+;; (autoload 'python-mode "python-mode" "Python Mode." t)
+;; (add-to-list 'auto-mode-alist '("\\.py\\'" . python-mode))
+;; (add-to-list 'interpreter-mode-alist '("python" . python-mode))
+;; (when (featurep 'python) (unload-feature 'python t))
+;; ;; documentation with py-help-at-point
+;; (add-hook 'python-mode-hook
+;;           '(lambda () (eldoc-mode 1)) t)
+;; ;; with auto-complete
+;; (setq py-load-pymacs-p t)
 
 ;;;; START EMACS SERVER ;;;;
 ; To open files with this instance: emacsclient <file>

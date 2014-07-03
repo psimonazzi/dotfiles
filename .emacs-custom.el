@@ -5,6 +5,7 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "gray10" :foreground "ivory"))))
  '(cursor ((t (:background "firebrick"))))
+ '(fringe ((t (:background "gray10"))))
  '(custom-documentation ((t (:foreground "pink"))))
  '(custom-invalid ((t (:inherit font-lock-warning-face))))
  '(escape-glyph ((((background dark)) (:foreground "deepskyblue"))))
