@@ -29,9 +29,9 @@
 ;; Blank scratch buffer
 (setq initial-scratch-message "")
 
-(defconst my/mono-font "M+ 1mn regular-14")
+;(defconst my/mono-font "M+ 1mn regular-14")
 ;;(defconst my/mono-font "Luculent-14")
-;;(defconst my/mono-font "Consolas-14")
+(defconst my/mono-font "Consolas-15")
 (defconst my/serif-font "DejaVu Serif-14")
 
 ;; Set font as soon as possible to avoid flickering
@@ -379,6 +379,8 @@
 ;; A custom www-mode
 (require 'www-mode nil 'noerror)
 
+(require 'undo-tree nil 'noerror)
+
 (require 'yaml-mode nil 'noerror)
 (add-to-list 'auto-mode-alist '("\\.yaml$" . yaml-mode))
 (add-hook 'yaml-mode-hook
@@ -443,7 +445,9 @@
 ;; Visual autocompletion when auto-complete is installed
 ;; (will show minor mode AC in buffer)
 (require 'auto-complete-config nil 'noerror)
-(ac-config-default)
+(condition-case ex
+    (ac-config-default)
+  (error (message "auto-complete-config not found.")))
 
 ;; hippie expand is more advanced than dabbrev expand
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -479,6 +483,7 @@
 ;; (ido-mode t)
 ;; (setq ido-enable-prefix nil
 ;;       ido-enable-flex-matching t
+
 ;;       ido-create-new-buffer 'always
 ;;       ido-use-filename-at-point 'guess
 ;;       ido-max-prospects 10
