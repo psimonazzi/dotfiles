@@ -133,7 +133,7 @@
 <script>
 {
 \"tag\": [ \"\" ],
-\"timestamp\": \"2013/07/01 10:10\"
+\"timestamp\": \"yyyy-mm-ddThh:mm:ss.sssZ\"
 }
 </script>
 

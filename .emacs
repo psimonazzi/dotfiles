@@ -299,9 +299,11 @@
 ;; « and » are already mapped to AltGr-< and AltGr->
 ;; Or use "C-x 8 <" and "C-x 8 >" (view all commands with C-x C-h)
 ;;(global-set-key (kbd "C-M-l") "λ")
-(global-set-key (kbd "M-2") "“") ;;(ucs-insert #x2018 1 t)
-(global-set-key (kbd "M-\"") "”") ;;(ucs-insert #x2019 1 t)
+(global-set-key (kbd "M-2") "“") ;;(ucs-insert #x201C 1 t)
+(global-set-key (kbd "M-\"") "”") ;;(ucs-insert #x201D 1 t)
 (global-set-key (kbd "M-\-") "—") ;;(ucs-insert #x2019 1 t)
+(global-set-key (kbd "M-\'") "‘") ;;(ucs-insert #x2018 1 t)
+(global-set-key (kbd "M-\?") "’") ;;(ucs-insert #x2019 1 t)
 
 ;; Fix 'home' and 'end' keys (obsolete)
 (global-set-key [home] 'beginning-of-line)
