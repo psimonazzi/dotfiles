@@ -31,8 +31,10 @@
 
 ;(defconst my/mono-font "M+ 1mn regular-14")
 ;;(defconst my/mono-font "Luculent-14")
-(defconst my/mono-font "Consolas-15")
-(defconst my/serif-font "DejaVu Serif-14")
+;;(defconst my/mono-font "Consolas-15")
+(defconst my/mono-font "Input Mono Narrow Light-14")
+;;(defconst my/serif-font "DejaVu Serif-14")
+(defconst my/serif-font "Input Serif Narrow Light-14")
 
 ;; Set font as soon as possible to avoid flickering
 ;;(set-frame-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
@@ -46,7 +48,7 @@
 (if (window-system)
     (cond
      ((> (display-pixel-width) 1480)
-      (set-frame-size (selected-frame) 144 46)
+      (set-frame-size (selected-frame) 160 46)
       (set-frame-position (selected-frame) (/ (- (display-pixel-width) 1480) 2) 24)))
      (t
       (set-frame-parameter (selected-frame) 'fullscreen nil)))
