@@ -74,6 +74,10 @@ xterm*|rxvt*)
     ;;
 esac
 
+# trim paths on the prompt (disable with unset PROMPT_DIRTRIM)
+PROMPT_DIRTRIM=3
+
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
