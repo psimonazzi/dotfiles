@@ -367,6 +367,13 @@
 ;;(when (file-exists-p my/emacs-dir)
 ;;  (mapc 'load (directory-files my/emacs-dir nil "^[^#].*el$")))
 
+; add MELPA to package archives (package-install)
+; list with package-list-packages
+(require 'package)
+(add-to-list 'package-archives
+             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;;(package-initialize)
+
 ;; Magit GIT mode
 (require 'magit nil 'noerror)
 
@@ -444,7 +451,9 @@
 ;;(require 'tramp)
 ;;(setq tramp-default-method "scp")
 
+
 ;; Visual autocompletion when auto-complete is installed
+;; (install apt package auto-complete-el)
 ;; (will show minor mode AC in buffer)
 (require 'auto-complete-config nil 'noerror)
 (condition-case ex
@@ -842,8 +851,9 @@ by using nxml's indentation rules."
 (add-hook 'python-mode-hook
           #'(lambda ()
               (define-key python-mode-map "\C-m" 'newline-and-indent)))
-;; autocompletion with Jedi
+;; autocompletion with Jedi (install package python-jedi or python3-jedi)
 (add-hook 'python-mode-hook 'jedi:setup)
+(setq jedi:complete-on-dot t)
 ;; (defun my-jedi-setup ()
 ;;   (jedi:setup)
 ;;   (setq jedi:server-command
