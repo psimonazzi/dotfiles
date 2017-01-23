@@ -32,9 +32,10 @@
 ;(defconst my/mono-font "M+ 1mn regular-14")
 ;;(defconst my/mono-font "Luculent-14")
 ;;(defconst my/mono-font "Consolas-15")
+;;(defconst my/serif-font "FiraCode Light-14") ; with ligatures
 (defconst my/mono-font "Input Mono Narrow Light-14")
 ;;(defconst my/serif-font "DejaVu Serif-14")
-(defconst my/serif-font "Input Serif Narrow Light-14")
+;(defconst my/serif-font "Input Serif Narrow Light-14")
 
 ;; Set font as soon as possible to avoid flickering
 ;;(set-frame-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
@@ -55,9 +56,6 @@
 ;; or set fullscreen
 ;(toggle-frame-fullscreen) ;; without window decorations
 ;(toggle-frame-maximized)
-
-;; custom Emacs 24 color themes support
-;;(add-to-list 'custom-theme-load-path (concat my/emacs-dir "themes/"))
 
 (setq current-language-environment "UTF-8")
 (setq locale-coding-system 'utf-8)
@@ -215,12 +213,15 @@
 
 
 ;; Windows-like selection (CUA mode)
-;(pc-selection-mode t)
 (cua-mode 1)
+(delete-selection-mode 1)
 ;; Use the clipboard (t by default in 24)
 (setq x-select-enable-clipboard t)
-;; Decorated buffer switcher
-(iswitchb-mode t)
+;; Enabling these will also put a selection in the main clipboard, making it impossible to overwrite selected text with the clipboard contents
+;; (setq x-select-enable-primary t
+;;       save-interprogram-paste-before-kill t)
+;; prefer newer file version
+(setq load-prefer-newer t)
 
 ;; bookmarks
 (setq bookmark-default-file (concat user-emacs-directory "emacs.bmk")
@@ -238,10 +239,10 @@
  version-control t)
 
 ;; saveplace remembers your location in a file when saving files
+(require 'saveplace)
 (setq save-place-file (concat user-emacs-directory "saveplace"))
 ;; activate it for all buffers
 (setq-default save-place t)
-(require 'saveplace)
 
 ;; savehist keeps track of some history
 (setq savehist-additional-variables
@@ -371,7 +372,8 @@
 ; list with package-list-packages
 (require 'package)
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
+             '("melpa-stable" . "https://stable.melpa.org/packages/")
+             t)
 ;;(package-initialize)
 
 ;; Magit GIT mode
@@ -425,27 +427,27 @@
 ;; CSV mode
 (setq csv-separators (quote ("," ";")))
 
-;; Markdown mode (need markdown bin package)
-(autoload 'markdown-mode "markdown-mode"
-  "Major mode for editing Markdown files" t)
-(add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)$" . markdown-mode))
+;; Markdown mode (need markdown bin package, config not needed if installed as package)
+;;(autoload 'markdown-mode "markdown-mode"
+;;  "Major mode for editing Markdown files" t)
+;;(add-to-list 'auto-mode-alist '("\\.\\(md\\|markdown\\)$" . markdown-mode))
 
 ;; javascript js2 mode
-(autoload 'js2-mode "js2-mode" nil t)
-(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
-;; force my colors on js2
-(setq js2-use-font-lock-faces t)
-;; javascript js mode
-(add-hook 'js-mode-hook
-          (lambda () (electric-layout-mode -1)))
-;; Indent 2 spaces in js
-(setq js-indent-level 2)
-;; Make lambda functions appear as pretty lambda symbol
-(font-lock-add-keywords
- 'js-mode `(("\\(function\\) *("
-             (0 (progn (compose-region (match-beginning 1)
-                                       (match-end 1) "\u0192")
-                       nil)))))
+;; (autoload 'js2-mode "js2-mode" nil t)
+;; (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+;; ;; force my colors on js2
+;; (setq js2-use-font-lock-faces t)
+;; ;; javascript js mode
+;; (add-hook 'js-mode-hook
+;;           (lambda () (electric-layout-mode -1)))
+;; ;; Indent 2 spaces in js
+;; (setq js-indent-level 2)
+;; ;; Make lambda functions appear as pretty lambda symbol
+;; (font-lock-add-keywords
+;;  'js-mode `(("\\(function\\) *("
+;;              (0 (progn (compose-region (match-beginning 1)
+;;                                        (match-end 1) "\u0192")
+;;                        nil)))))
 
 ;; Require Tramp at startup (use with /username@host:remote_path (for default method) or /ftp:username@host:remote_path or /ssh:...)
 ;;(require 'tramp)
@@ -455,10 +457,10 @@
 ;; Visual autocompletion when auto-complete is installed
 ;; (install apt package auto-complete-el)
 ;; (will show minor mode AC in buffer)
-(require 'auto-complete-config nil 'noerror)
-(condition-case ex
-    (ac-config-default)
-  (error (message "auto-complete-config not found.")))
+;; (require 'auto-complete-config nil 'noerror)
+;; (condition-case ex
+;;     (ac-config-default)
+;;   (error (message "auto-complete-config not found.")))
 
 ;; hippie expand is more advanced than dabbrev expand
 (setq hippie-expand-try-functions-list '(try-expand-dabbrev
@@ -471,15 +473,6 @@
                                          try-expand-line
                                          try-complete-lisp-symbol-partially
                                          try-complete-lisp-symbol))
-;; auto completion with dabbrev
-;;(require 'dabbrev)
-;;(setq dabbrev-always-check-other-buffers t)
-;;(setq dabbrev-abbrev-char-regexp "\\sw\\|\\s_")
-;;(global-set-key [C-tab] 'dabbrev-expand)
-;; (define-abbrev-table 'global-abbrev-table '(
-;;                                             ("<<" "《" nil 0)
-;;                                             (">>" "》" nil 0)
-;;                                             ))
 
 
 ;; meaningful names for buffers with the same name
@@ -506,8 +499,15 @@
 ;; (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
 ;; Groovy/gradle mode
-(autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
-(add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode))
+;; (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
+;; (add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode))
+
+;; display search stats in modeline
+;; (require 'anzu-mode nil 'noerror)
+;; (condition-case ex
+;;     (global-anzu-mode +1)
+;;   (error (message "anzu-mode not found.")))
+
 
 ;;;; USEFUL FUNCTIONS ;;;;
 
@@ -811,39 +811,6 @@ by using nxml's indentation rules."
 ;;     )
 ;;   "My C Programming Style")
 
-;; Highlight operators like [] and ;
-;; (font-lock-add-keywords 'c-mode '(
-;; ;; Currently support for []|&!.+=-/%*,(){}
-;;   ("\\(\\[\\|\\]\\|[|!\\.\\+\\=\\&]\\|-\\|\\/\\|\\%\\|\\*\\|,\\|(\\|)\\| \\ | \\|{\\|}\\)" 1 font-lock-operator-face )
-;; ;; End of c++ statement
-;;   ("\\(;\\)" 1 font-lock-end-statement ) ))
-;; (make-face 'font-lock-operator-face)
-;; (make-face 'font-lock-end-statement)
-;; (setq font-lock-operator-face 'font-lock-operator-face)
-;; (setq font-lock-end-statement 'font-lock-end-statement)
-
-;; (global-set-key "\C-i" 'my-tab)
-;; (defun my-tab (&optional pre-arg)
-;;   "If preceeding character is part of a word then dabbrev-expand,
-;; else if right of non whitespace on line then tab-to-tab-stop or
-;; indent-relative, else if last command was a tab or return then dedent
-;; one step, else indent 'correctly'"
-;;   (interactive "*P")
-;;   (cond ((= (char-syntax (preceding-char)) ?w)
-;; 	 (let ((case-fold-search t)) (dabbrev-expand pre-arg)))
-;; 	(((current-column) (current-indentation))
-;; 	 (indent-relative))
-;; 	(t (indent-according-to-mode)))
-;;   (setq this-command 'my-tab))
-;; (add-hook 'html-mode-hook
-;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
-;; (add-hook 'sgml-mode-hook
-;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
-;; (add-hook 'perl-mode-hook
-;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
-;; (add-hook 'text-mode-hook
-;; 	  '(lambda () (local-set-key "\C-i" 'my-tab)))
-
 ;; Python (python.el)
 (require 'python)
 (when (featurep 'python-mode) (unload-feature 'python-mode t))
@@ -883,4 +850,6 @@ by using nxml's indentation rules."
 
 ;;;; START EMACS SERVER ;;;;
 ; To open files with this instance: emacsclient <file>
-(server-start)
+(unless (and (fboundp 'server-running-p)
+             (server-running-p))
+  (server-start))

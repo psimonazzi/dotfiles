@@ -5,7 +5,6 @@
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "gray10" :foreground "ivory"))))
  '(cursor ((t (:background "firebrick"))))
- '(fringe ((t (:background "gray10"))))
  '(custom-documentation ((t (:foreground "pink"))))
  '(custom-invalid ((t (:inherit font-lock-warning-face))))
  '(escape-glyph ((((background dark)) (:foreground "deepskyblue"))))
@@ -18,6 +17,7 @@
  '(font-lock-string-face ((((class color) (background dark)) (:foreground "#ffc0cb"))))
  '(font-lock-variable-name-face ((t (:foreground "#fce94f"))))
  '(font-lock-warning-face ((((class color) (min-colors 88) (background dark)) (:background "brown4" :foreground "palevioletred1" :slant italic))))
+ '(fringe ((t (:background "gray10"))))
  '(highlight ((((class color) (background dark)) (:background "darkolivegreen" :foreground "palegreen"))))
  '(hl-line ((t (:background "grey20"))))
  '(js2-error-face ((t (:inherit font-lock-warning-face))))
@@ -58,13 +58,12 @@
  '(tool-bar ((default (:foreground "black")) (((type x w32 ns) (class color)) (:background "grey75"))))
  '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "#533803"))))
  '(trailing-whitespace ((t (:inherit font-lock-warning-face)))))
+;; add jedi (and yasnippet) for python support
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(js2-basic-offset 2)
- '(js2-cleanup-whitespace t)
- '(js2-enter-indents-newline t)
- '(js2-include-gears-externs nil)
- '(js2-include-rhino-externs nil))
+ '(package-selected-packages
+   (quote
+    (yaml-mode anzu rainbow-mode csv-mode systemd groovy-mode markdown-mode))))
