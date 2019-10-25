@@ -65,5 +65,5 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (yaml-mode anzu rainbow-mode csv-mode systemd groovy-mode markdown-mode))))
+   '(yaml-mode anzu rainbow-mode csv-mode groovy-mode markdown-mode))
+ '(vc-svn-global-switches '("--force-interactive")))
