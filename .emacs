@@ -36,7 +36,7 @@
 ;(defconst my/mono-font "Input Mono Narrow Light-14")
 (defconst my/mono-font "JetBrains Mono-14:light")
 ;;(defconst my/serif-font "DejaVu Serif-14")
-;(defconst my/serif-font "Input Serif Narrow Light-14")
+(defconst my/serif-font "Input Serif Narrow Light-14")
 
 ;; Set font as soon as possible to avoid flickering
 ;;(set-frame-font "-DEC-Terminal-Medium-R-Normal--14-140-75-75-C-80-ISO8859-1")
