@@ -1,10 +1,10 @@
 # Private data moved to ~/.secrets env vars
-#[github]
-#	user = ???
+[github]
+	user = psimonazzi
 #	token = ???
-#[user]
-#	name = ???
-#	email = ???
+[user]
+	name = ps
+	email = p.simonazzi@gmail.com
 [core]
 	autocrlf = input
 	safecrlf = true
@@ -26,4 +26,3 @@
 [merge]
         summary = true
         verbosity = 1
-
