@@ -33,7 +33,8 @@
 ;;(defconst my/mono-font "Luculent-14")
 ;;(defconst my/mono-font "Consolas-15")
 ;;(defconst my/serif-font "FiraCode Light-14") ; with ligatures
-(defconst my/mono-font "Input Mono Narrow Light-14")
+;(defconst my/mono-font "Input Mono Narrow Light-14")
+(defconst my/mono-font "JetBrains Mono-14:light")
 ;;(defconst my/serif-font "DejaVu Serif-14")
 ;(defconst my/serif-font "Input Serif Narrow Light-14")
 
@@ -42,7 +43,7 @@
 ;;(set-frame-font "Bitstream Vera Sans Mono-11")
 ;;(set-frame-font "Inconsolata-16")
 (condition-case ex
-    (set-frame-font my/mono-font)
+    (set-face-font 'default my/mono-font);(set-frame-font my/mono-font)
   (error (message (format "Cannot set font, reverting to default. %s" ex))))
 
 ;; Window size in characters, scrollbar position
@@ -299,7 +300,7 @@
 
 ;; Some redundant Meta/Alt bindings for frequently used operations (we are not on a Space Cadet keyboard anymore)
 (global-set-key "\M-f" 'find-file) ;; default: forward-word
-(global-set-key "\M-s" 'save-buffer) ;; default: center-line
+;;(global-set-key "\M-s" 'save-buffer) ;; default: center-line
 (global-set-key "\M-z" 'undo) ;; default: zap-to-char
 ;;(global-set-key "\M-x" 'cua-cut) ;; default: command (can use Menu Key instead)
 ;;(global-set-key "\M-c" 'cua-copy) ;; default: capitalize
@@ -399,7 +400,7 @@
              (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; NXML mode
-(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\|html\\)\\'" . nxml-mode))
+(add-to-list 'auto-mode-alist '("\\.\\(xml\\|xsl\\|rng\\|xhtml\\)\\'" . nxml-mode))
 (push '("<\\?xml" . nxml-mode) magic-mode-alist)
 
 (setq nxml-slash-auto-complete-flag t)

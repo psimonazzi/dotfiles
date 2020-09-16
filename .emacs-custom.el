@@ -31,6 +31,7 @@
  '(linum ((t (:inherit default :foreground "grey30"))))
  '(match ((((class color) (background dark)) (:background "RoyalBlue3" :foreground "lightBlue"))))
  '(minibuffer-prompt ((((background dark)) (:foreground "springgreen1"))))
+ '(mode-line ((t (:background "gray56" :foreground "black"))))
  '(nxml-attribute-colon-face ((t (:inherit nxml-attribute-local-name-face))))
  '(nxml-attribute-local-name ((t (:inherit font-lock-type-face))))
  '(nxml-attribute-local-name-face ((t (:foreground "palegreen"))))
@@ -58,7 +59,6 @@
  '(tool-bar ((default (:foreground "black")) (((type x w32 ns) (class color)) (:background "grey75"))))
  '(tooltip ((((class color)) (:inherit variable-pitch :background "lightyellow" :foreground "#533803"))))
  '(trailing-whitespace ((t (:inherit font-lock-warning-face)))))
-;; add jedi (and yasnippet) for python support
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
