@@ -47,16 +47,16 @@
   (error (message (format "Cannot set font, reverting to default. %s" ex))))
 
 ;; Window size in characters, scrollbar position
-(if (window-system)
-    (cond
-     ((> (display-pixel-width) 1480)
-      (set-frame-size (selected-frame) 160 46)
-      (set-frame-position (selected-frame) (/ (- (display-pixel-width) 1480) 2) 24)))
-     (t
-      (set-frame-parameter (selected-frame) 'fullscreen nil)))
+;; (if (window-system)
+;;     (cond
+;;      ((> (display-pixel-width) 1480)
+;;       (set-frame-size (selected-frame) 160 46)
+;;       (set-frame-position (selected-frame) (/ (- (display-pixel-width) 1480) 2) 24)))
+;;      (t
+;;       (set-frame-parameter (selected-frame) 'fullscreen nil)))
 ;; or set fullscreen
 ;(toggle-frame-fullscreen) ;; without window decorations
-;(toggle-frame-maximized)
+(toggle-frame-maximized)
 
 (setq current-language-environment "UTF-8")
 (setq locale-coding-system 'utf-8)
@@ -499,15 +499,11 @@
 ;;       ispell-extra-args '("--sug-mode=ultra"))
 ;; (autoload 'flyspell-mode "flyspell" "On-the-fly spelling checker." t)
 
-;; Groovy/gradle mode
-;; (autoload 'groovy-mode "groovy-mode" "Major mode for editing Groovy code." t)
-;; (add-to-list 'auto-mode-alist '("\\.\\(groovy\\|gradle\\)$" . groovy-mode))
-
 ;; display search stats in modeline
-;; (require 'anzu-mode nil 'noerror)
-;; (condition-case ex
-;;     (global-anzu-mode +1)
-;;   (error (message "anzu-mode not found.")))
+(require 'anzu-mode nil 'noerror)
+(condition-case ex
+    (global-anzu-mode +1)
+  (error (message "anzu-mode not found.")))
 
 
 ;;;; USEFUL FUNCTIONS ;;;;

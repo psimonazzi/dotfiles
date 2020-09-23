@@ -4,6 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(default ((t (:background "gray10" :foreground "ivory"))))
+ '(anzu-mode-line ((t (:foreground "dark slate gray" :weight bold))))
  '(cursor ((t (:background "firebrick"))))
  '(custom-documentation ((t (:foreground "pink"))))
  '(custom-invalid ((t (:inherit font-lock-warning-face))))
@@ -64,6 +65,6 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(yaml-mode anzu rainbow-mode csv-mode groovy-mode markdown-mode))
+ '(package-selected-packages '(anzu csv-mode markdown-mode rainbow-mode magit yaml-mode))
+ '(anzu-mode-lighter "")
  '(vc-svn-global-switches '("--force-interactive")))
